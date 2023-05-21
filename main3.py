@@ -36,9 +36,6 @@ st.title("Stock Prediction APP")
 stocks =("TSLA", "AAPL", "MSFT", "005930.KS")
 selected_stocks = st.selectbox("Select dataset for prediction", stocks)
 
-n_years = st.slider("Years of prediction:", 1, 4)
-period = n_years*365
-
 @st.cache_data
 def load_data(ticker):
     data = yf.download(ticker, START, TODAY)
@@ -116,6 +113,8 @@ st.subheader("Best Model")
 st.write(best_model)
 
 # Make predictions using the best model
+n_years = st.slider("Years of prediction:", 1, 4)
+period = n_years*365
 if st.button("Make Future Predictions"):
     # Retrain the best model on the entire dataset
     best_model_instance.fit(ts)
